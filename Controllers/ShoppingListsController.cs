@@ -61,6 +61,14 @@ namespace ApiProductManagment.Controllers
             return Ok(shoppingListresult); ;
         }
 
+        [HttpPut("assign-User-shopping")]
+        public async Task<IActionResult> UpdateUserXShopping(string idUser, Guid idShopping) 
+        {
+            var result = await _shoppingkService.UploadUserXShopping(idUser, idShopping);
+            return Ok(result);
+        }
+
+
         // DELETE api/<ShoppingListsController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)

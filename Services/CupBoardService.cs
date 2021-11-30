@@ -1,11 +1,11 @@
 ﻿using ApiProductManagment.Dtos;
+using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Repository.RepositoryBase;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace ApiProductManagment.Services
@@ -13,10 +13,16 @@ namespace ApiProductManagment.Services
     public class CupBoardService : ICupboardService
     {
         private readonly IRepositoryCupboard _repositoryCupBoard;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserXCupBoardRepository _userXCupBoardRepository;
         private readonly IMapper _mapper;
-        public CupBoardService(IRepositoryCupboard cupboard, IMapper mapper)
+        public CupBoardService(IRepositoryCupboard cupboard,IUserRepository userRepository, 
+                                IUserXCupBoardRepository userXCupBoardRepository, IMapper mapper
+        )
         {
             _repositoryCupBoard = cupboard;
+            _userRepository = userRepository;
+            _userXCupBoardRepository = userXCupBoardRepository;
             _mapper = mapper;
         }
         public async Task<IEnumerable<CupboardDto>> ConsultCupboards()
@@ -83,6 +89,25 @@ namespace ApiProductManagment.Services
             {
                 throw new Exception("El cupboard no existe en la base de datos." );
             }
+        }
+
+        public async Task<UserXCupboardDto> UploadUserXCupBoard(string idUser, Guid idCupboard)
+        {
+            var cupboard = _repositoryCupBoard.QueryById(x => x.IdCupBoard == idCupboard);
+            if (cupboard == null) throw new Exception("El cupBoard no existe.");
+
+            var user = _userRepository.QueryById(x => x.Id == idUser);
+            if (user == null) throw new Exception("El User no existe.");
+
+            var userxCupboard = new UserXcupBoard()
+            {
+                IdUser = user.Id,
+                IdCupBoard = cupboard.IdCupBoard
+            };
+
+            await _userXCupBoardRepository.Upload(userxCupboard);
+            var result = _mapper.Map<UserXCupboardDto>(userxCupboard);
+            return result;
         }
     }
 }

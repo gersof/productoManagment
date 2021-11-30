@@ -58,6 +58,13 @@ namespace ApiProductManagment.Controllers
             return Ok(productresult);
         }
 
+        [HttpPut("assign-category-product")]
+        public async Task<IActionResult> UpdateCategoryProduct(Guid IdCategory, Guid idProduct)  
+        {
+            var result = await _productService.UploadCategoryXProduct(IdCategory,idProduct); 
+            return Ok(result);
+        }
+
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)

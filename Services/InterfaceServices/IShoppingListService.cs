@@ -13,6 +13,7 @@ namespace ApiProductManagment.Services.InterfaceServices
         ShoppingListDto GetShoppingList(Guid id);
         Task<ShoppingListDto> CreateShoppingList(EditingShoppingListDto shoppingList);
         Task<EditingShoppingListDto> UploadShoppingList(Guid id, EditingShoppingListDto shoppingList);
+        Task<UserXshoppingListDto> UploadUserXShopping(string idUser, Guid idShopping);  
         Task<ShoppingListDto> DeleteShoppingList(Guid id);
     }
 }
