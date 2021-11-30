@@ -17,11 +17,17 @@ namespace ApiProductManagment.Extention
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+            services.AddTransient<IUserRepository, UsersRepository>();
+
             services.AddScoped(typeof(IRepositoryBase<CupBoard>), typeof(RepositoryBase<CupBoard>));
             services.AddTransient<IRepositoryCupboard, RepositoryCupBoard>();
 
+            services.AddTransient<IUserXCupBoardRepository, UserXCupBoardRepository>();
+            services.AddTransient<IUserXShoppingRepository, UserXShoppingRepository>();
+
             services.AddScoped(typeof(IRepositoryBase<Category>), typeof(RepositoryBase<Category>));
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICategoryXProductRepository, CategoryXProductRepository>();
 
             services.AddScoped(typeof(IRepositoryBase<Product>), typeof(RepositoryBase<Product>));
             services.AddTransient<IProductRepository, ProductRepository>();

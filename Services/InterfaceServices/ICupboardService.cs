@@ -11,6 +11,7 @@ namespace ApiProductManagment.Services.InterfaceServices
         CupboardDto ConsultCupboard(Guid id);
         CreateCupBoardDto CreateCupboards(CreateCupBoardDto cupboard);  
         Task<CreateCupBoardDto> UpdateCupboard(Guid id, CreateCupBoardDto cupboard);
+        Task<UserXCupboardDto> UploadUserXCupBoard(string idUser, Guid IdCupboard); 
         Task<CupboardDto> DeleteCupBoard(Guid id); 
     }
 }

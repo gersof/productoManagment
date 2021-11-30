@@ -48,6 +48,13 @@ namespace ApiProductManagment.Controllers
            return Ok(result);
         }
 
+        [HttpPut("assign-User-cupboard")]
+        public async Task<IActionResult> UpdateUserXCupBoard(string idUser, Guid idCupBoard)
+        {
+            var result = await _cupBoardService.UploadUserXCupBoard(idUser, idCupBoard);
+            return Ok(result);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCupboard(Guid id)
         {
