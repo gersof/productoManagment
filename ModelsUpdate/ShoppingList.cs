@@ -11,7 +11,7 @@ namespace ApiProductManagment.ModelsUpdate
         public decimal? Value { get; set; }
         public DateTime? ExpirationDate { get; set; }
 
-        public Product IdProductNavigation { get; set; }
+        public Product Product { get; set; } 
         public ICollection<UserXshoppingList> UserXshoppingLists { get; set; }
     }
 }

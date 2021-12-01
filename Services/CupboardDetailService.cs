@@ -3,6 +3,7 @@ using ApiProductManagment.Dtos.EditingDtos;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace ApiProductManagment.Services
 
         public IEnumerable<CupboardDetailDto> GetCupboardDetails()
         {
-            var CupboardDetailDb = _repository.Queries();
+            var CupboardDetailDb = _repository.Queries().Include(x => x.Product).Include(x => x.CupBoard);
             var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
             return CupboardDetailDto;
         } 
