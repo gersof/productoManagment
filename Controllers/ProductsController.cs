@@ -1,6 +1,5 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
-using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;

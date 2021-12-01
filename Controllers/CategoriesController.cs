@@ -1,16 +1,13 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
-using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 
 namespace ApiProductManagment.Controllers
 {
@@ -44,8 +41,6 @@ namespace ApiProductManagment.Controllers
         public ActionResult<CategoryDto> GetCategory(Guid id)
         {
             return _categoryService.GetCategory(id);
-            //var idcategory = _categoryService.GetC<ategory(id);
-            //return idcategory;
         }
 
         // POST api/<CategoriesController>

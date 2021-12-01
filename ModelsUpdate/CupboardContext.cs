@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
 
 namespace ApiProductManagment.ModelsUpdate
 {
@@ -19,7 +16,7 @@ namespace ApiProductManagment.ModelsUpdate
         public  DbSet<CupBoard> CupBoards { get; set; }
         public  DbSet<CupBoardDetail> CupBoardDetail { get; set; } 
         public  DbSet<Product> Products { get; set; }
-        public  DbSet<ShoppingList> ShoppingLists { get; set; }
+        public  DbSet<ShoppingList> ShoppingList { get; set; } 
         public  DbSet<Trademark> Trademarks { get; set; }
         public  DbSet<Users> User { get; set; } 
         public  DbSet<UserXcupBoard> UserXcupBoard { get; set; }
@@ -130,7 +127,9 @@ namespace ApiProductManagment.ModelsUpdate
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
-                entity.HasOne(d => d.IdProductNavigation)
+                entity.Property(e => e.Value).HasColumnName("value_");
+
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.ShoppingLists)
                     .HasForeignKey(d => d.IdProduct)
                     .HasConstraintName("FK_User_Shopping");
