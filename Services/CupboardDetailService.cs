@@ -43,7 +43,7 @@ namespace ApiProductManagment.Services
 
         public IEnumerable<CupboardDetailDto> GetExpiredProducts()
         {
-            var CupboardDetailDb = _repository.Queries().Where(x => x.ExpirationDate < DateTime.Now);
+            var CupboardDetailDb = _repository.Queries().Include(x => x.Product).Include(x => x.CupBoard).Where(x => x.ExpirationDate < DateTime.Now);
             var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
             return CupboardDetailDto;
         }
@@ -53,7 +53,7 @@ namespace ApiProductManagment.Services
         {
             var date = DateTime.Now;
             var range = date.AddDays(5);
-            var CupboardDetailDb = _repository.Queries().Where(x => x.ExpirationDate < range && x.ExpirationDate >= DateTime.Now);
+            var CupboardDetailDb = _repository.Queries().Include(x => x.Product).Include(x => x.CupBoard).Where(x => x.ExpirationDate < range && x.ExpirationDate >= DateTime.Now);
             var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
             return CupboardDetailDto;
         }
