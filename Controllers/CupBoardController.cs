@@ -35,7 +35,7 @@ namespace ApiProductManagment.Controllers
         }
 
         [HttpPost("Create-cupboard-Detail")]
-        public  ActionResult CreateCupBoardDetail(CreateCupBoardDto cupboard)
+        public  IActionResult CreateCupBoardDetail(CreateCupBoardDto cupboard)
         { 
           var response =  _cupBoardService.CreateCupboards(cupboard);     
            return Ok(response);

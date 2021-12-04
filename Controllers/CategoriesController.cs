@@ -28,7 +28,6 @@ namespace ApiProductManagment.Controllers
         }
 
 
-        // GET: api/<CategoriesController>
         [HttpGet]
         public IActionResult Get()
         {
@@ -36,14 +35,12 @@ namespace ApiProductManagment.Controllers
             return Ok(categories);
         }
 
-        // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
         public ActionResult<CategoryDto> GetCategory(Guid id)
         {
             return _categoryService.GetCategory(id);
         }
 
-        // POST api/<CategoriesController>
         [HttpPost]
         public async Task<IActionResult> Post(EditingCategoryDto category)
         {
@@ -51,7 +48,6 @@ namespace ApiProductManagment.Controllers
             return Ok(resultcategory);
         }
 
-        // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, EditingCategoryDto category)
         {
@@ -59,7 +55,6 @@ namespace ApiProductManagment.Controllers
             return Ok(categoryresult);
         }
 
-        // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

@@ -1,7 +1,6 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.Interfaces;
-using ApiProductManagment.Repository.RepositoryBase;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using System;
