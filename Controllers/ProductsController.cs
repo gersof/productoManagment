@@ -25,7 +25,6 @@ namespace ApiProductManagment.Controllers
             _mapper     = mapper;
         }
 
-        // GET: api/<ProductsController>
         [HttpGet]
         public IActionResult Get()
         {
@@ -41,7 +40,6 @@ namespace ApiProductManagment.Controllers
             return _productService.GetProduct(id);
         }
 
-        // POST api/<ProductsController>
         [HttpPost]
         public async Task<IActionResult> Post(PostProductDto product)
         {
@@ -49,7 +47,6 @@ namespace ApiProductManagment.Controllers
             return Ok(resultproduct);
         }
 
-        // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, PutProductDto product)
         {
@@ -64,7 +61,6 @@ namespace ApiProductManagment.Controllers
             return Ok(result);
         }
 
-        // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

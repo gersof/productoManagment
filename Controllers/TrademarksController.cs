@@ -26,8 +26,6 @@ namespace ApiProductManagment.Controllers
             _mapper = mapper;
         }
 
-
-        // GET: api/<TrademarksController>
         [HttpGet]
         public IActionResult Get()
         {
@@ -35,16 +33,12 @@ namespace ApiProductManagment.Controllers
             return Ok(trademarks);
         }
 
-        // GET api/<TrademarksController>/5
         [HttpGet("{id}")]
         public ActionResult<TrademarkDto> GetCategory(Guid id)
         {
             return _trademarkService.GetTrademark(id);
-            //var idcategory = _categoryService.GetCategory(id);
-            //return idcategory;
         }
 
-        // POST api/<TrademarksController>
         [HttpPost]
         public async Task<IActionResult> Post(EditingTrademarkDto trademark)
         {
@@ -52,7 +46,6 @@ namespace ApiProductManagment.Controllers
             return Ok(resultrademark);
         }
 
-        // PUT api/<TrademarksController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, EditingTrademarkDto trademark)
         {
@@ -60,7 +53,6 @@ namespace ApiProductManagment.Controllers
             return Ok(trademarkresult);
         }
 
-        // DELETE api/<TrademarksController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
