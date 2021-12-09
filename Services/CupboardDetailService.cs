@@ -40,13 +40,24 @@ namespace ApiProductManagment.Services
             throw new Exception("Error reading Cupboard Detail"); ;
         }
 
+
+        public IEnumerable<CupboardDetailDto> GetValidProducts()
+        {
+            //var date = DateTime.Now;
+            //var range = date.AddDays(1);
+            var CupboardDetailDb = _repository.Queries().Where(x => x.ExpirationDate >= DateTime.Now);
+            var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
+            return CupboardDetailDto;
+        }
+
+
         public IEnumerable<CupboardDetailDto> GetExpiredProducts()
         {
             var CupboardDetailDb = _repository.Queries().Where(x => x.ExpirationDate < DateTime.Now);
             var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
             return CupboardDetailDto;
-        }
-
+        }        
+        
 
         public IEnumerable<CupboardDetailDto> GetNextToExpire()
         {
