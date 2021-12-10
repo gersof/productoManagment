@@ -11,7 +11,7 @@ namespace ApiProductManagment.ModelsUpdate
         {
         }
 
-        public  DbSet<CategoriesXproduct> CategoriesXproducts { get; set; }
+        public  DbSet<CategoriesXproduct> CategoriesXproduct { get; set; } 
         public  DbSet<Category> Categories { get; set; }
         public  DbSet<CupBoard> CupBoards { get; set; }
         public  DbSet<CupBoardDetail> CupBoardDetail { get; set; } 

@@ -32,8 +32,6 @@ namespace ApiProductManagment.Controllers
             return Ok(products);
         }
 
-
-        // GET api/<ProductsController>/5
         [HttpGet("{id}")]
         public ActionResult<ProductDto> GetProduct(Guid id)
         {

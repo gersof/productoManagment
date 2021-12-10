@@ -8,7 +8,7 @@ namespace ApiProductManagment.Dtos.EditingDtos
     public class PutProductDto
     {
         public string NameProduct { get; set; }
-
+        public Guid? IdMark { get; set; }
         public string BarCode { get; set; }
     }
 }

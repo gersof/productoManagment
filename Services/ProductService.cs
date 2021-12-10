@@ -61,7 +61,9 @@ namespace ApiProductManagment.Services
             if (productDb != null)
             {
                 productDb.NameProduct = product.NameProduct;
-                // var upCategory = _mapper.Map<Category>(category);
+                productDb.IdMark = (Guid)product.IdMark;
+                productDb.BarCode = product.BarCode;
+
                 await _repository.Upload(productDb);
                 var response = _mapper.Map<PutProductDto>(productDb);
                 return response;
