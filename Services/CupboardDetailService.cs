@@ -49,6 +49,16 @@ namespace ApiProductManagment.Services
         }
 
 
+        public IEnumerable<CupboardDetailDto> GetValidProducts()
+        {
+            //var date = DateTime.Now;
+            //var range = date.AddDays(5);
+            var CupboardDetailDb = _repository.Queries().Include(x => x.Product).Include(x => x.CupBoard).Where(x => x.ExpirationDate >= DateTime.Now);
+            var CupboardDetailDto = _mapper.Map<IEnumerable<CupboardDetailDto>>(CupboardDetailDb);
+            return CupboardDetailDto;
+        } 
+        
+        
         public IEnumerable<CupboardDetailDto> GetNextToExpire()
         {
             var date = DateTime.Now;
