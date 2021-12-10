@@ -16,11 +16,17 @@ namespace ApiProductManagment.Services
     {
 
         private readonly IProductRepository _repository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryXProductRepository _categoryXProductRepository;
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository repository, IMapper mapper)
+        public ProductService(IProductRepository repository, ICategoryRepository category, 
+                               ICategoryXProductRepository categoryXProductRepository, IMapper mapper
+        )
         {
             _repository = repository;
+            _categoryRepository = category;
+            _categoryXProductRepository = categoryXProductRepository;
             _mapper = mapper;
         }
 
@@ -79,6 +85,25 @@ namespace ApiProductManagment.Services
             {
                 throw new Exception("Error deleting Category");
             }
+        }
+
+        public async Task<CategoriesXproductsDto> UploadCategoryXProduct(Guid idCategory, Guid idProduct)
+        {
+            var category =  _categoryRepository.QueryById(x => x.IdCategory == idCategory);
+            if (category == null) throw new Exception("La categoria no existe.");
+
+            var product = _repository.QueryById(x => x.IdProduct == idProduct);
+            if (product == null) throw new Exception("La producto no existe.");
+
+            var categoryxproduct = new CategoriesXproduct()
+            {
+                IdCategory = category.IdCategory,
+                IdProduct = product.IdProduct
+            };
+
+            await _categoryXProductRepository.Upload(categoryxproduct);
+            var result = _mapper.Map<CategoriesXproductsDto>(categoryxproduct);
+            return result;
         }
     }
 }

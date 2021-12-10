@@ -18,12 +18,16 @@ namespace ApiProductManagment.Mapping
             CreateMap<CupBoardDetail, CupboardDetailPutDto>().ReverseMap();
             CreateMap<CupboardDetailDto, CupBoardDetail>().ReverseMap();
 
+            CreateMap<UserXcupBoard, UserXCupboardDto>().ReverseMap();
+            CreateMap<UserXshoppingList, UserXshoppingListDto>().ReverseMap();
+
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<Product, PostProductDto>().ReverseMap();
             CreateMap<Product, PutProductDto>().ReverseMap();
 
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, EditingCategoryDto>().ReverseMap();
+            CreateMap<CategoriesXproduct, CategoriesXproductsDto>().ReverseMap();
             
             CreateMap<Trademark, TrademarkDto>().ReverseMap();
             CreateMap<Trademark, EditingTrademarkDto>().ReverseMap();

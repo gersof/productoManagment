@@ -1,12 +1,11 @@
 ﻿using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.Interfaces;
 
-
 namespace ApiProductManagment.Repository.RepositoryBase
 {
-    public class CategoryRepository : RepositoryBase<Category>, ICategoryRepository 
+    public class UserXShoppingRepository : RepositoryBase<UserXshoppingList>, IUserXShoppingRepository 
     {
-        public CategoryRepository(CupboardContext context) : base(context)
+        public UserXShoppingRepository(CupboardContext context) : base(context)
         {
         }
     }

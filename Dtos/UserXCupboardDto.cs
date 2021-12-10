@@ -8,7 +8,7 @@ namespace ApiProductManagment.Dtos
     public class UserXCupboardDto
     {
         public Guid IdUserXcupboard { get; set; }
-        public Guid IdUser { get; set; }
+        public string IdUser { get; set; }
         public Guid IdCupBoard { get; set; }
     }
 }

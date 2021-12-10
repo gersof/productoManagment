@@ -4,9 +4,9 @@ using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiProductManagment.Services
@@ -14,17 +14,24 @@ namespace ApiProductManagment.Services
     public class ShoppingListService : IShoppingListService
     {
         private readonly IShoppingListRepository _repository;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserXShoppingRepository _userXShoppingRepository;
         private readonly IMapper _mapper;
 
-        public ShoppingListService(IShoppingListRepository repository, IMapper mapper)
+        public ShoppingListService(IShoppingListRepository repository, 
+                                    IUserRepository userRepository, IUserXShoppingRepository userXShoppingRepository, 
+                                    IMapper mapper
+        )
         {
             _repository = repository;
+            _userRepository = userRepository;
+            _userXShoppingRepository = userXShoppingRepository;
             _mapper = mapper;
         }
 
         public IEnumerable<ShoppingListDto> GetShoppingLists()
         {
-            var shoppingListsDb = _repository.Queries();
+            var shoppingListsDb = _repository.Queries().Include(x => x.Product);
             var shoppingListsDto = _mapper.Map<IEnumerable<ShoppingListDto>>(shoppingListsDb);
             return shoppingListsDto;
         }
@@ -79,6 +86,25 @@ namespace ApiProductManagment.Services
             {
             throw new Exception("Error editing Category");
             }
-        }      
+        }
+
+        public async Task<UserXshoppingListDto> UploadUserXShopping(string idUser, Guid idShopping)
+        {
+            var shopping = _repository.QueryById(x => x.IdShopping == idShopping);
+            if (shopping == null) throw new Exception("El shoppingList no existe.");
+
+            var user = _userRepository.QueryById(x => x.Id == idUser);
+            if (user == null) throw new Exception("El User no existe.");
+
+            var userxshopping = new UserXshoppingList()
+            {
+                IdUser = user.Id,
+                IdShopping = shopping.IdShopping
+            };
+
+            await _userXShoppingRepository.Upload(userxshopping);
+            var result = _mapper.Map<UserXshoppingListDto>(userxshopping);
+            return result;
+        }
     }
 }

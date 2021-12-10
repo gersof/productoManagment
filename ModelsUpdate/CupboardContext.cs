@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
 
 namespace ApiProductManagment.ModelsUpdate
 {
@@ -19,10 +16,10 @@ namespace ApiProductManagment.ModelsUpdate
         public  DbSet<CupBoard> CupBoards { get; set; }
         public  DbSet<CupBoardDetail> CupBoardDetail { get; set; } 
         public  DbSet<Product> Products { get; set; }
-        public  DbSet<ShoppingList> ShoppingLists { get; set; }
+        public  DbSet<ShoppingList> ShoppingList { get; set; } 
         public  DbSet<Trademark> Trademarks { get; set; }
-        public  DbSet<User> Users { get; set; }
-        public  DbSet<UserXcupBoard> UserXcupBoards { get; set; }
+        public  DbSet<Users> User { get; set; } 
+        public  DbSet<UserXcupBoard> UserXcupBoard { get; set; }
         public  DbSet<UserXshoppingList> UserXshoppingLists { get; set; }
 
 
@@ -41,12 +38,12 @@ namespace ApiProductManagment.ModelsUpdate
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
-                entity.HasOne(d => d.IdCategoryNavigation)
+                entity.HasOne(d => d.Category)
                     .WithMany(p => p.CategoriesXproducts)
                     .HasForeignKey(d => d.IdCategory)
                     .HasConstraintName("FK_Category_CategoryXProduct");
 
-                entity.HasOne(d => d.IdProductNavigation)
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.CategoriesXproducts)
                     .HasForeignKey(d => d.IdProduct)
                     .HasConstraintName("FK_Product_CategoryXProduct");
@@ -130,7 +127,9 @@ namespace ApiProductManagment.ModelsUpdate
 
                 entity.Property(e => e.IdProduct).IsUnicode(false);
 
-                entity.HasOne(d => d.IdProductNavigation)
+                entity.Property(e => e.Value).HasColumnName("value_");
+
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.ShoppingLists)
                     .HasForeignKey(d => d.IdProduct)
                     .HasConstraintName("FK_User_Shopping");
@@ -146,31 +145,31 @@ namespace ApiProductManagment.ModelsUpdate
                 entity.Property(e => e.Mark).IsUnicode(false);
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<Users>(entity =>
             {
-                entity.HasKey(e => e.IdUser)
+                entity.HasKey(e => e.Id)
                     .HasName("PK__Users__3717C982E1EBA768");
 
-                entity.Property(e => e.IdUser).IsUnicode(false);
+                entity.Property(e => e.Id).IsUnicode(false);
             });
 
             modelBuilder.Entity<UserXcupBoard>(entity =>
             {
-                entity.HasKey(e => e.IdUserXcupboard)
+                entity.HasKey(e => e.IdUserXCupBoard)
                     .HasName("PK__UserXCup__D653D90B6AEE5AA5");
 
-                entity.Property(e => e.IdUserXcupboard).IsUnicode(false);
+                entity.Property(e => e.IdUserXCupBoard).HasColumnName("idUserXCupBoard");
 
                 entity.Property(e => e.IdCupBoard).IsUnicode(false);
 
                 entity.Property(e => e.IdUser).IsUnicode(false);
 
-                entity.HasOne(d => d.IdCupBoardNavigation)
+                entity.HasOne(d => d.CupBoard)
                     .WithMany(p => p.UserXcupBoards)
                     .HasForeignKey(d => d.IdCupBoard)
                     .HasConstraintName("FK_CupBoard_UserCupBoard");
 
-                entity.HasOne(d => d.IdUserNavigation)
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.UserXcupBoards)
                     .HasForeignKey(d => d.IdUser)
                     .HasConstraintName("FK_User_CupBoard");
@@ -181,18 +180,18 @@ namespace ApiProductManagment.ModelsUpdate
                 entity.HasKey(e => e.IdUserXshopping)
                     .HasName("PK__UserXSho__3DDAB8017C0E8680");
 
-                entity.Property(e => e.IdUserXshopping).IsUnicode(false);
+                entity.Property(e => e.IdUserXshopping).HasColumnName("idUserXShoppingList");
 
                 entity.Property(e => e.IdShopping).IsUnicode(false);
 
                 entity.Property(e => e.IdUser).IsUnicode(false);
 
-                entity.HasOne(d => d.IdShoppingNavigation)
+                entity.HasOne(d => d.Shopping)
                     .WithMany(p => p.UserXshoppingLists)
                     .HasForeignKey(d => d.IdShopping)
                     .HasConstraintName("FK_Shopping_UserXShopping");
 
-                entity.HasOne(d => d.IdUserNavigation)
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.UserXshoppingLists)
                     .HasForeignKey(d => d.IdUser)
                     .HasConstraintName("FK_User_UserXShopping");
@@ -205,8 +204,8 @@ namespace ApiProductManagment.ModelsUpdate
             modelBuilder.Entity<Product>().Property(e => e.IdProduct).HasConversion<string>();
             modelBuilder.Entity<ShoppingList>().Property(e => e.IdShopping).HasConversion<string>();
             modelBuilder.Entity<Trademark>().Property(e => e.IdTrademark).HasConversion<string>();
-            modelBuilder.Entity<User>().Property(e => e.IdUser).HasConversion<string>();
-            modelBuilder.Entity<UserXcupBoard>().Property(e => e.IdUserXcupboard).HasConversion<string>();
+            modelBuilder.Entity<Users>().Property(e => e.Id).HasConversion<string>();
+            modelBuilder.Entity<UserXcupBoard>().Property(e => e.IdUserXCupBoard).HasConversion<string>();
             modelBuilder.Entity<UserXshoppingList>().Property(e => e.IdUserXshopping).HasConversion<string>();
 
             base.OnModelCreating(modelBuilder);

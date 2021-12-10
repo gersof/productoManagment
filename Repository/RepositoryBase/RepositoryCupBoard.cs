@@ -29,12 +29,6 @@ namespace ApiProductManagment.Repository.RepositoryBase
                 CupBoardContext.CupBoards.Add(tableCupboard);
                 CupBoardContext.SaveChanges();
 
-                /*foreach (var item in cupboard.CupBoardDetails) 
-                {
-                    var detail = _mapper.Map<CupBoardDetail>(item);
-                    detail.IdCupBoard = tableCupboard.IdCupBoard;
-                    CupBoardContext.CupBoardDetail.Add(detail);
-                }*/
                 transaction.Commit();
             }
             catch (Exception ex)

@@ -35,7 +35,7 @@ namespace ApiProductManagment.Controllers
         }
 
         [HttpPost("Create-cupboard-Detail")]
-        public  ActionResult CreateCupBoardDetail(CreateCupBoardDto cupboard)
+        public  IActionResult CreateCupBoardDetail(CreateCupBoardDto cupboard)
         { 
           var response =  _cupBoardService.CreateCupboards(cupboard);     
            return Ok(response);
@@ -46,6 +46,13 @@ namespace ApiProductManagment.Controllers
         {
            var result = await _cupBoardService.UpdateCupboard(id, cupboard);
            return Ok(result);
+        }
+
+        [HttpPut("assign-User-cupboard")]
+        public async Task<IActionResult> UpdateUserXCupBoard(string idUser, Guid idCupBoard)
+        {
+            var result = await _cupBoardService.UploadUserXCupBoard(idUser, idCupBoard);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]

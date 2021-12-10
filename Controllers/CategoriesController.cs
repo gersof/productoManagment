@@ -1,16 +1,13 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
-using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 
 namespace ApiProductManagment.Controllers
 {
@@ -31,7 +28,6 @@ namespace ApiProductManagment.Controllers
         }
 
 
-        // GET: api/<CategoriesController>
         [HttpGet]
         public IActionResult Get()
         {
@@ -39,16 +35,12 @@ namespace ApiProductManagment.Controllers
             return Ok(categories);
         }
 
-        // GET api/<CategoriesController>/5
         [HttpGet("{id}")]
         public ActionResult<CategoryDto> GetCategory(Guid id)
         {
             return _categoryService.GetCategory(id);
-            //var idcategory = _categoryService.GetC<ategory(id);
-            //return idcategory;
         }
 
-        // POST api/<CategoriesController>
         [HttpPost]
         public async Task<IActionResult> Post(EditingCategoryDto category)
         {
@@ -56,7 +48,6 @@ namespace ApiProductManagment.Controllers
             return Ok(resultcategory);
         }
 
-        // PUT api/<CategoriesController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, EditingCategoryDto category)
         {
@@ -64,7 +55,6 @@ namespace ApiProductManagment.Controllers
             return Ok(categoryresult);
         }
 
-        // DELETE api/<CategoriesController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

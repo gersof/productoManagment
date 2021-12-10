@@ -13,6 +13,7 @@ namespace ApiProductManagment.Services.InterfaceServices
         ProductDto GetProduct(Guid id);
         Task<ProductDto> CreateProduct(PostProductDto product);
         Task<PutProductDto> UploadProduct(Guid id, PutProductDto product);
+        Task<CategoriesXproductsDto> UploadCategoryXProduct(Guid idCategory, Guid IdProduct);
         Task<ProductDto> DeleteProduct(Guid id);
     }
 }

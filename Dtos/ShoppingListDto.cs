@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApiProductManagment.ModelsUpdate;
+using System;
 
 namespace ApiProductManagment.Dtos
 {
@@ -12,5 +10,7 @@ namespace ApiProductManagment.Dtos
         public int? Amount { get; set; }
         public decimal? Value { get; set; }
         public DateTime? ExpirationDate { get; set; }
+
+        public Product Product { get; set; }
     }
 }

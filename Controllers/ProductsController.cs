@@ -1,6 +1,5 @@
 ﻿using ApiProductManagment.Dtos;
 using ApiProductManagment.Dtos.EditingDtos;
-using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -26,7 +25,6 @@ namespace ApiProductManagment.Controllers
             _mapper     = mapper;
         }
 
-        // GET: api/<ProductsController>
         [HttpGet]
         public IActionResult Get()
         {
@@ -42,7 +40,6 @@ namespace ApiProductManagment.Controllers
             return _productService.GetProduct(id);
         }
 
-        // POST api/<ProductsController>
         [HttpPost]
         public async Task<IActionResult> Post(PostProductDto product)
         {
@@ -50,7 +47,6 @@ namespace ApiProductManagment.Controllers
             return Ok(resultproduct);
         }
 
-        // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, PutProductDto product)
         {
@@ -58,7 +54,13 @@ namespace ApiProductManagment.Controllers
             return Ok(productresult);
         }
 
-        // DELETE api/<ProductsController>/5
+        [HttpPut("assign-category-product")]
+        public async Task<IActionResult> UpdateCategoryProduct(Guid IdCategory, Guid idProduct)  
+        {
+            var result = await _productService.UploadCategoryXProduct(IdCategory,idProduct); 
+            return Ok(result);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

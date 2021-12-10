@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiProductManagment.ModelsUpdate;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApiProductManagment.Dtos
@@ -12,5 +13,8 @@ namespace ApiProductManagment.Dtos
         public DateTime? EntryDate { get; set; }
         public DateTime? ExitDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
+
+        public CupBoard CupBoard { get; set; }
+        public Product Product { get; set; }
     }
 }
