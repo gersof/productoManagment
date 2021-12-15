@@ -3,6 +3,7 @@ using ApiProductManagment.ModelsUpdate;
 using ApiProductManagment.Repository.Interfaces;
 using ApiProductManagment.Services.InterfaceServices;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

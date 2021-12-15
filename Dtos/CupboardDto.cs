@@ -11,5 +11,7 @@ namespace ApiProductManagment.Dtos
         public string NameCupBoard { get; set; }
         public bool? IsDefault { get; set; }
         public DateTime? CreationDate { get; set; }
+
+        //public List<CupboardDetailDto> CupBoardDetails { get; set; }
     }
 }
